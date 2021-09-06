@@ -1,0 +1,69 @@
+{
+  "name": "node-express-template",
+  "version": "1.0.1",
+  "description": "Node.js API server based on express project template.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./src/index.js",
+    "debug": "node --inspect-brk ./dist/index.js",
+    "build": "babel src --out-dir ./dist --source-maps",
+    "serve": "node ./dist/index.js",
+    "lint": "standard --verbose | snazzy",
+    "lint:fix": "standard  --verbose --fix | snazzy",
+    "test": "mocha --require @babel/register './@(test|src)/**/*.spec.js'",
+    "coverage": "npx nyc --exclude '**/*.spec.js' --reporter=lcovonly --reporter=html npm run test",
+    "doc": "npx jsdoc --recurse --destination ./doc --package ./package.json src"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "API",
+    "backend",
+    "server",
+    "express",
+    "expressjs",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Miha Urbanija <miha.urbanija@gmail.com>",
+  "license": "Apache-2.0 WITH LLVM-exception",
+  "repository": "github:mihaur/node-express-template",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "mocha": "^9.0.3",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "snazzy": "^9.0.0",
+    "standard": "*"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "dist"
+    ]
+  },
+  "lint-staged": {
+    "(src|test)/**/*.js": [
+      "standard --fix",
+      "mocha --require @babel/register --bail './@(test|src)/**/*.spec.js'"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "directories": {
+    "test": "test"
+  }
+}
